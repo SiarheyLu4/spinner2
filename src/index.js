@@ -21,8 +21,8 @@ async function fetchImages(query, page) {
     const response = await axios.get(
     `https://pixabay.com/api/?key=${KEY}&q=${query}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=40`);
     console.log(response);
-    var target = document.getElementById('gallery');
-    var spinner = new Spinner(opts).spin(target);
+    // var target = document.getElementById('gallery');
+    // var spinner = new Spinner(opts).spin(target);
     return response;
 };
 
@@ -37,6 +37,9 @@ function onSearchForm(e) {
         Notify.failure('The search string cannot be empty. Please specify your search query.');
     return;
     }
+
+    var target = document.getElementById('gallery');
+    var spinner = new Spinner(opts).spin(target);
 
     fetchImages(query, page)
     .then(({ data }) => {
@@ -80,6 +83,9 @@ function renderGallery(images) {
 function onBtnLoadMore() {
     page += 1;
 
+    var target = document.getElementById('gallery');
+    var spinner = new Spinner(opts).spin(target);
+
     fetchImages(query, page)
         .then(({ data }) => {
         renderGallery(data.hits);
@@ -90,6 +96,9 @@ function onBtnLoadMore() {
             Notify.failure("We're sorry, but you've reached the end of search results.");
         }
     })
-        .catch(error => console.log(error));
+        .catch(error => console.log(error))
+        .finally(() => {
+            spinner.stop();
+    });
 };
 
