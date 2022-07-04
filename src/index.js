@@ -1,5 +1,7 @@
 import './sass/main.scss';
-import './js/preloader';
+// import './js/preloader';
+import { Spinner } from 'spin.js';
+import opts from './js/spinner';
 import axios from "axios";
 import { Notify } from 'notiflix';
 
@@ -19,6 +21,8 @@ async function fetchImages(query, page) {
     const response = await axios.get(
     `https://pixabay.com/api/?key=${KEY}&q=${query}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=40`);
     console.log(response);
+    var target = document.getElementById('gallery');
+    var spinner = new Spinner(opts).spin(target);
     return response;
 };
 
@@ -49,6 +53,7 @@ function onSearchForm(e) {
     .catch(error => console.log(error))
     .finally(() => {
         searchForm.reset();
+        spinner.stop();
     });
 };
 
