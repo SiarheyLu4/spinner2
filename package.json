@@ -3,10 +3,10 @@
   "version": "1.1.0",
   "description": "",
   "main": "index.js",
-  "homepage": "https://SiarheyLu4.github.io/spinner1",
+  "homepage": "https://SiarheyLu4.github.io/spinner2",
   "scripts": {
     "dev": "parcel src/*.html --open",
-    "build": "parcel build src/*.html --public-url /spinner1/"
+    "build": "parcel build src/*.html --public-url /spinner2/"
   },
   "repository": {
     "type": "git",
